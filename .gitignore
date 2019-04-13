@@ -2,6 +2,7 @@
 
 # compiled output
 /backend/dist
+/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run
@@ -9,7 +10,6 @@
 
 # dependencies
 /node_modules
-/frontend/node_modules
 /backend-app/node_modules
 
 # profiling files
