@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+    production: false,
+
+    contentListUrl: 'https://rbcp.rbmbtnx.net/api/v2/content/communication',
+
+    placeholderThumbnailImage: '/assets/placeholder.jpg',
 };
 
 /*

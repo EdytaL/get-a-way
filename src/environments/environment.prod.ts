@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+    production: true,
+
+    contentListUrl: 'https://rbcp.rbmbtnx.net/api/v2/content/communication',
+    placeholderThumbnailImage: '/assets/placeholder.jpg',
 };

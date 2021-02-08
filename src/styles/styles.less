@@ -1,0 +1,135 @@
+@import (reference) './theme';
+@import (reference) './reference.less';
+@import '../../node_modules/@videogular/ngx-videogular/fonts/videogular.css';
+@font-face {
+    font-family: Roboto;
+    src: url('~src/assets/Roboto/Roboto-Regular.ttf') format('opentype');
+}
+html,
+body,
+app-root,
+nz-layout.main {
+    height: 100vh;
+    font-family: 'Roboto', 'arial', sans-serif;
+    position: relative;
+}
+
+.content-height-100 {
+    min-height: ~'calc(100vh - @{app-header-height} - @{app-footer-height})';
+}
+.layout-margin-bottom {
+    margin-bottom: @layout-margin-bottom;
+}
+
+.main-background {
+    color: #fff;
+    background-image: url('~src/assets/background.jpg');
+    background-size: 100%;
+    background-size: cover;
+    height: 100vh;
+}
+.main-message {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 240px;
+    left: 100px;
+    h1,
+    h2 {
+        color: @primary-light-font-color;
+    }
+    button {
+        width: 130px;
+        padding: 8px;
+        box-shadow: 0px 2px 4px rgb(0 0 0 / 10%);
+        border-radius: 4px;
+        border: none;
+        background-color: @btn-primary-color;
+        margin-top: 10px;
+        cursor: pointer;
+        &:focus {
+            border: none;
+            opacity: 0.75;
+        }
+    }
+}
+.transparent {
+    background-color: transparent;
+}
+
+.separator {
+    height: 26px;
+    border-right: 1px solid #acadc1;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+app-video-details {
+    padding-top: 70px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+// Defined by antd - https://github.com/NG-ZORRO/ng-zorro-antd/blob/e5535d252be3644db380fa2618cdefe1cfcc0676/components/radio/style/index.less#L134
+
+.base-line-height {
+    line-height: 1em !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.ant-btn-danger {
+    &:hover {
+        background-color: #d45c55;
+        border-color: #d45c55;
+    }
+
+    &:focus {
+        background-color: #b3463f;
+        border-color: #b3463f;
+    }
+
+    &:active {
+        background-color: #993b36;
+        border-color: #993b36;
+    }
+}
+
+.btn-container {
+    text-align: center;
+
+    & > button {
+        min-width: 100px;
+    }
+
+    & > button:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+.box-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 4px !important;
+    background-color: white;
+}
+
+i.info-circle {
+    color: @primary-color;
+    cursor: pointer;
+}
+
+.interactive-text {
+    cursor: pointer;
+    color: #8e8fa6;
+
+    &:hover {
+        color: #e65c00;
+    }
+}

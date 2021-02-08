@@ -1,0 +1,88 @@
+<div class="container">
+    <ng-container
+        [ngSwitch]="activeLayout"
+        *ngIf="!(fetchItemsPending$ | async)"
+    >
+        <ng-container *ngSwitchCase="'videoFeed'">
+            <ng-container *ngTemplateOutlet="videoFeed"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'videoPlayer'">
+            <ng-container *ngTemplateOutlet="videoPlayer"></ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf="fetchItemsPending$ | async">
+        <ng-container
+            *nzStringTemplateOutlet="skeletonsTemplate"
+        ></ng-container>
+    </ng-container>
+    <ng-container *ngIf="fetchItemsError$ | async">
+        <ng-container *nzStringTemplateOutlet="errorTemplate"></ng-container>
+    </ng-container>
+</div>
+<ng-template #videoPlayer>
+    <div
+        class="content-container player-container"
+        *ngIf="selectedVideo$ | async as video"
+    >
+        <nz-breadcrumb>
+            <nz-breadcrumb-item>
+                <a (click)="backToListing()">
+                    <i nz-icon nzType="arrow-left" nzTheme="outline"></i> Back
+                    to the listing
+                </a>
+            </nz-breadcrumb-item>
+        </nz-breadcrumb>
+        <app-video-player [video]="video"></app-video-player>
+        <app-video-details [video]="video"></app-video-details>
+    </div>
+</ng-template>
+<ng-template #videoFeed>
+    <div class="search-box-container">
+        <app-search-bar
+            [placeholder]="'What are you looking for today?'"
+            [size]="'default'"
+            [form]="searchForm"
+        ></app-search-bar>
+    </div>
+    <ng-container *ngIf="(items$ | async)?.length; else emptyTemplate">
+        <div class="content-container">
+            <ng-container *ngFor="let item of items$ | async as items">
+                <app-video-tile
+                    [item]="item"
+                    (videoSelected)="onVideoSelected($event)"
+                ></app-video-tile>
+            </ng-container>
+        </div>
+        <div class="pagination-wrapper">
+            <nz-pagination
+                [nzPageIndex]="(pagination$ | async)?.page"
+                [nzTotal]="(metadata$ | async)?.count"
+                [nzPageSize]="12"
+                [nzShowTotal]="totalTemplate"
+                (nzPageIndexChange)="changePage($event)"
+            ></nz-pagination>
+            <ng-template #totalTemplate let-total>
+                Total {{ (metadata$ | async)?.count | number: '1.0-0' }} items
+            </ng-template>
+        </div>
+    </ng-container>
+</ng-template>
+
+<ng-template #skeletonsTemplate>
+    <div class="content-container skeleton-container">
+        <app-video-tile-skeleton
+            *ngFor="let tile of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]"
+        ></app-video-tile-skeleton>
+    </div>
+</ng-template>
+
+<ng-template #emptyTemplate>
+    <div class="content-container empty-container">
+        <app-empty-results></app-empty-results>
+    </div>
+</ng-template>
+<ng-template #errorTemplate>
+    <div class="content-container error-container">
+        <app-error-page></app-error-page>
+    </div>
+</ng-template>
